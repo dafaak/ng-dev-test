@@ -15,14 +15,4 @@ export class DropdownComponent {
 
   data = input<any>();
 
-  private container = inject(ViewContainerRef);
-
-  // @ViewChild('dropdownContent') dropdownContent!: TemplateRef<any>;
-
-  // callback(index: any) {
-  //   this.items()?.[index].callback();
-  // }
-
-
-
 }

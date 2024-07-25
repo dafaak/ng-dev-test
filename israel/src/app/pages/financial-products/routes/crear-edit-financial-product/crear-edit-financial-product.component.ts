@@ -39,29 +39,8 @@ export class CrearEditFinancialProductComponent implements OnInit {
   ngOnInit() {
 
     if (this.productId) {
-      console.log('entro en tiene id')
       this.getProductById(this.productId as string);
     }
-  }
-
-  getProductById(productId: string) {
-    this.financialProductsService.getFinancialProductById(productId)
-      .subscribe({
-        next: res => {
-          console.log(res);
-          this.product.set(res);
-        }, error: err => {
-          console.log(err);
-        }
-      })
-  }
-
-  handleFormSubmit(financialProduct: FinancialProductInterface) {
-    this.createProduct(financialProduct);
-  }
-
-  handleCancel() {
-    this.router.navigate(['financial-products']);
   }
 
   createProduct(financialProduct: FinancialProductInterface) {
@@ -70,11 +49,47 @@ export class CrearEditFinancialProductComponent implements OnInit {
         {
           next: () => {
             this.toastService.showToast({message: 'Producto creado', type: toastType.SUCCESS});
-
+            this.navToFinancialProducts();
           },
           error: err => {
             this.toastService.showToast({message: 'Error creando producto', type: toastType.ERROR});
             console.error('Error creando producto: ', err);
+          }
+        }
+      )
+  }
+
+  getProductById(productId: string) {
+    this.financialProductsService.getFinancialProductById(productId)
+      .subscribe({
+        next: res => {
+          this.product.set(res);
+        }, error: err => {
+          console.error('Error obteniendo producto: ', err);
+        }
+      })
+  }
+
+  navToFinancialProducts() {
+    this.router.navigate(['financial-products']);
+  }
+
+  handleFormSubmit(financialProduct: FinancialProductInterface) {
+    if (this.productId) this.updateProduct(financialProduct);
+    if (!this.productId) this.createProduct(financialProduct);
+  }
+
+  updateProduct(financialProduct: FinancialProductInterface) {
+    this.financialProductsService.updateFinancialProduct(financialProduct)
+      .subscribe(
+        {
+          next: () => {
+            this.toastService.showToast({message: 'Producto actualizado', type: toastType.SUCCESS});
+            this.navToFinancialProducts();
+          },
+          error: err => {
+            this.toastService.showToast({message: 'Error actualizando producto', type: toastType.ERROR});
+            console.error('Error actualizando producto: ', err);
           }
         }
       )

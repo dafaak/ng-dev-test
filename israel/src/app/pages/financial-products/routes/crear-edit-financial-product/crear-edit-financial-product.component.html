@@ -1,6 +1,6 @@
 <div class="container-form-route">
   <app-financial-product-form (formSubmit)="handleFormSubmit($event)" [isEditing]="productId?true:false"
-                              [product]="product()" (cancelEvent)="handleCancel()">
+                              [product]="product()" (cancelEvent)="navToFinancialProducts()">
   </app-financial-product-form>
 </div>
 

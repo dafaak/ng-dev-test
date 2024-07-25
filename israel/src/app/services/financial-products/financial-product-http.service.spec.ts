@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { FinancialProductHttpService } from './financial-product-http.service';
 import { HttpClient } from "@angular/common/http";
-import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
+import { HttpClientTestingModule, HttpTestingController, provideHttpClientTesting } from "@angular/common/http/testing";
 import spyOn = jest.spyOn;
 
 describe('FinancialProductHttpService', () => {
@@ -13,7 +13,7 @@ describe('FinancialProductHttpService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports:[HttpClientTestingModule],
-      providers:[FinancialProductHttpService]
+      providers:[FinancialProductHttpService,provideHttpClientTesting(),]
     });
     service = TestBed.inject(FinancialProductHttpService);
     httpClient = TestBed.inject(HttpClient);

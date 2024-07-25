@@ -5,7 +5,9 @@ import { Directive, ElementRef, HostListener, inject } from '@angular/core';
   standalone: true
 })
 export class ShowContentDirective {
-  private el = inject(ElementRef);
+
+  constructor(private readonly el: ElementRef) {
+  }
 
   @HostListener('click') onClick() {
     this.el.nativeElement.children[0].children[1].style.display = 'block';

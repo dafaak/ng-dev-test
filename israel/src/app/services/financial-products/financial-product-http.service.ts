@@ -30,8 +30,7 @@ export class FinancialProductHttpService {
       .pipe(
         map(products => {
           return products.find(product => product.id.toLowerCase() === productId.toLowerCase());
-        }),
-        tap(res => console.log(res))
+        })
       )
   }
 
@@ -45,5 +44,8 @@ export class FinancialProductHttpService {
     return this.httpClient.post(`${this.financialProductsUrl}`, financialProduct);
   }
 
+  updateFinancialProduct(financialProduct: FinancialProductInterface) {
+    return this.httpClient.put(`${this.financialProductsUrl}`, financialProduct);
+  }
 
 }

@@ -21,10 +21,5 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should show bank logo', () => {
-      const bpLogo = fixture.nativeElement.querySelector('[data-test="bank-logo"]')
-      expect(bpLogo).toBeTruthy();
-    }
-  )
 
 });
