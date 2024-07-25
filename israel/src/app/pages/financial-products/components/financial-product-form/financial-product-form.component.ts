@@ -1,10 +1,10 @@
-import { Component, inject, output } from '@angular/core';
+import { Component, effect, inject, input, OnInit, output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { combineLatest, debounceTime, distinctUntilChanged, Subscription } from "rxjs";
-import { FinancialProductHttpService } from "../../../../services";
 import { NgClass } from "@angular/common";
 import { UniqueValidatorService } from "./validators/unique-validator.service";
 import { FinancialProductInterface } from "../../../../models";
+import { validateDateGreaterThanCurrent } from "./validators/date-validators.function";
 
 
 type fieldFormErrorMessages = {
@@ -28,24 +28,36 @@ type fieldFormErrorMessages = {
   styleUrl: './financial-product-form.component.scss'
 })
 export class FinancialProductFormComponent {
+  product = input<FinancialProductInterface | undefined>();
+  isEditing = input<boolean>();
+
   formSubmit = output<FinancialProductInterface>();
+
+  cancelEvent = output<boolean>();
+
   createEditForm: FormGroup;
+
   errorMessages: { [typeError: string]: (length?: number) => string } = {
     required: () => 'Este campo es requerido',
     minlength: (minlength?: number) => `Este campo debe tener al menos ${minlength} caracteres`,
     maxlength: (maxLength?: number) => `Este campo debe tener máximo ${maxLength} caracteres`,
     invalidId: () => 'Este id ya existe',
-    dateNotPass: () => 'La fecha tiene que ser mayor o igual a la actual',
+    invalidDate: () => 'La fecha tiene que ser mayor o igual a la actual',
   };
 
   errorMessagesByField: fieldFormErrorMessages = {id: [], name: [], description: [], logo: [], date_release: []}
 
   formSubscription!: Subscription;
 
-  private financialProductsService = inject(FinancialProductHttpService);
   private uniqueValidatorService = inject(UniqueValidatorService);
 
   constructor() {
+    effect(() => {
+      if (this.product()) {
+        this.patchValues();
+        this.manageErrorForm();
+      }
+    });
     this.createEditForm = new FormGroup(
       {
         id: new FormControl('',
@@ -70,7 +82,7 @@ export class FinancialProductFormComponent {
         logo: new FormControl('', [
           Validators.required]),
         date_release: new FormControl('', [
-          Validators.required]),
+          Validators.required, validateDateGreaterThanCurrent()]),
         date_revision: new FormControl(''),
       }
     )
@@ -78,6 +90,10 @@ export class FinancialProductFormComponent {
     this.createEditForm.get('date_revision')?.disable();
 
     this.manageErrorForm();
+  }
+
+  cancel() {
+    this.cancelEvent.emit(true);
   }
 
   getMessageErrorControl(control: AbstractControl): string[] {
@@ -136,6 +152,18 @@ export class FinancialProductFormComponent {
 
   onSubmit() {
     this.formSubmit.emit(this.createEditForm.getRawValue());
+  }
+
+  patchValues() {
+    this.createEditForm.patchValue({
+      id: this.product()?.id,
+      name: this.product()?.name,
+      description: this.product()?.description,
+      logo: this.product()?.logo,
+      date_release: new Date(this.product()!.date_release).toISOString().slice(0, 10),
+      date_revision: new Date(this.product()!.date_revision).toISOString().slice(0, 10),
+    });
+    this.createEditForm.controls['id'].disable();
   }
 
   setControlErrorMessage(controlName: string): void {

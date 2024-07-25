@@ -10,7 +10,7 @@
   </div>
 
 
-  <app-products-table [financialProducts]="financialProducts$|async" [amountOfRecordsToShow]="amountOfRecordsToShow">
+  <app-products-table (editProductEvent)="navToEdit($event)" [financialProducts]="financialProducts$|async" [amountOfRecordsToShow]="amountOfRecordsToShow">
   </app-products-table>
 
   <app-table-footer [amount]="totalRecords" (amountChange)="handleAmountChange($event)">

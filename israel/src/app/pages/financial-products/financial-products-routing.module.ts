@@ -13,7 +13,12 @@ export const routes: Routes = [
   {
     path: 'create',
     component: CrearEditFinancialProductComponent
+  },
+  {
+    path: 'edit/:productId',
+    component: CrearEditFinancialProductComponent
   }
+
 ]
 
 @NgModule({

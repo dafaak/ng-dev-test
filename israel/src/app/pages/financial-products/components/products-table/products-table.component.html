@@ -19,14 +19,7 @@
         <td>{{ product.date_release|slice:0:10 }}</td>
         <td>{{ product.date_revision|slice:0:10 }}</td>
         <td>
-          <!--          <ul>-->
-          <!--            <li>...-->
-          <!--              <ul [id]="'options-'+product.id">-->
-          <!--                <li>Editar</li>-->
-          <!--                <li>Eliminar</li>-->
-          <!--              </ul>-->
-          <!--            </li>-->
-          <!--          </ul>-->
+          <app-dropdown appShowDropdownContent [items]="itemsDropdown" [data]="product"></app-dropdown>
         </td>
       </tr>
     }

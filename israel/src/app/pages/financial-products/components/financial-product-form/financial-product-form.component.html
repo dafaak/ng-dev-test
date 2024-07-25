@@ -1,6 +1,6 @@
 <div class="form-card">
 
-  <h2>Formulario de Registro</h2>
+  <h2>Formulario de {{ isEditing() ? 'Actualización' : 'Registro' }}</h2>
   <hr>
   <div class="form-card-container">
     <form action="" [formGroup]="createEditForm" id="form-product">
@@ -82,8 +82,8 @@
 
   <div class="actions-container">
 
-    <button class="button secondary-button" type="button" id="btn-reset">
-      Reiniciar
+    <button class="button secondary-button" type="button" id="btn-reset" (click)="cancel()">
+      Cancelar
     </button>
     <button class="button primary-button" type="submit" id="btn-submit" [disabled]="createEditForm.invalid"
             (click)="onSubmit()">

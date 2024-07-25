@@ -1,5 +1,6 @@
-<div style="background-color: white; margin: auto; max-width: 780px;">
-  <app-financial-product-form (formSubmit)="handleFormSubmit($event)">
+<div class="container-form-route">
+  <app-financial-product-form (formSubmit)="handleFormSubmit($event)" [isEditing]="productId?true:false"
+                              [product]="product()" (cancelEvent)="handleCancel()">
   </app-financial-product-form>
 </div>
 

@@ -1,5 +1,9 @@
 <app-header></app-header>
 <div class="container"></div>
 <router-outlet/>
+<ng-template #toast>
+  <div [class]="'toast'" id="toast">{{ toastInfo.message }}</div>
+</ng-template>
+
 
 

@@ -1,0 +1,14 @@
+<div class="dropdown button">
+  <button class="dropdown-button">
+        <span style="writing-mode: vertical-lr; width: 7px;">
+            ...
+        </span>
+  </button>
+
+  <div class="dropdown-content">
+    @for (item of items(); track $index) {
+      <a (click)="item.callback(data())">{{ item.label }}</a>
+    }
+  </div>
+
+</div>

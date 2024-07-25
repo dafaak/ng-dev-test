@@ -40,4 +40,8 @@ export class FinancialProductsComponent {
   navToCreate() {
     this.router.navigate(['financial-products', 'create'])
   }
+
+  navToEdit(productId: string) {
+    this.router.navigate(['financial-products', 'edit', productId]);
+  }
 }
