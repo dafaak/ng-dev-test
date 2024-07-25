@@ -1,7 +1,8 @@
-import { Component,  input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { FinancialProductInterface } from "../../../../models";
 import { AsyncPipe, SlicePipe } from "@angular/common";
 import { FallbackImageDirective } from "../../../../directives/fallback-image/fallback-image.directive";
+import { environment } from "../../../../../environments/environment.development";
 
 @Component({
   selector: 'app-products-table',
@@ -17,7 +18,8 @@ import { FallbackImageDirective } from "../../../../directives/fallback-image/fa
 export class ProductsTableComponent {
   fallbackImage = '/assets/images/default-product-icon.svg';
 
-  financialProducts = input<FinancialProductInterface[]|null>();
+  financialProducts = input<FinancialProductInterface[] | null>();
+  amountOfRecordsToShow = input<number>(environment.DEFAULT_RECORDS_TO_SHOW);
 
   constructor() {
   }

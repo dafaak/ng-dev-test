@@ -5,7 +5,7 @@ export const authorInterceptor: HttpInterceptorFn = (req, next) => {
 
   const authReq = req.clone({
     setHeaders: {
-      authorId: environment.authorId
+      authorId: environment.AUTHOR_ID
     }
   });
 

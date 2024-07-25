@@ -9,25 +9,27 @@
   </tr>
 
   @for (product of financialProducts(); track product.id) {
-    <tr data-test="financial-product">
-      <td data-test="financial-product-logo">
-        <img [src]="product.logo" [appFallbackImage]="fallbackImage" alt="product-icon" width="30px">
-      </td>
-      <td data-test="financial-product-name">{{ product.name }}</td>
-      <td data-test="financial-product-description">{{ product.description }}</td>
-      <td data-test="financial-product-date_release">{{ product.date_release|slice:0:10 }}</td>
-      <td data-test="financial-product-date_revision">{{ product.date_revision|slice:0:10 }}</td>
-      <td>
-        <!--          <ul>-->
-        <!--            <li>...-->
-        <!--              <ul [id]="'options-'+product.id">-->
-        <!--                <li>Editar</li>-->
-        <!--                <li>Eliminar</li>-->
-        <!--              </ul>-->
-        <!--            </li>-->
-        <!--          </ul>-->
-      </td>
-    </tr>
+    @if ($index < amountOfRecordsToShow()) {
+      <tr data-test="financial-product">
+        <td data-test="financial-product-logo">
+          <img [src]="product.logo" [appFallbackImage]="fallbackImage" alt="product-icon" width="30px">
+        </td>
+        <td data-test="financial-product-name">{{ product.name }}</td>
+        <td data-test="financial-product-description">{{ product.description }}</td>
+        <td data-test="financial-product-date_release">{{ product.date_release|slice:0:10 }}</td>
+        <td data-test="financial-product-date_revision">{{ product.date_revision|slice:0:10 }}</td>
+        <td>
+          <!--          <ul>-->
+          <!--            <li>...-->
+          <!--              <ul [id]="'options-'+product.id">-->
+          <!--                <li>Editar</li>-->
+          <!--                <li>Eliminar</li>-->
+          <!--              </ul>-->
+          <!--            </li>-->
+          <!--          </ul>-->
+        </td>
+      </tr>
+    }
   } @empty {
     <tr>
       <td data-test="no-records-message" colspan="5">No se encontraron productos financieros</td>
