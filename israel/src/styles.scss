@@ -1,1 +1,93 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --darkGrayishBlue50: #f9fafc;
+  --blue500: #0f265c;
+  --yellow500: #ffdd00;
+  --darkGrayishBlue200: #e9ecf3;
+}
+
+html * {
+  font-family: sans-serif !important;
+}
+
+.header {
+  background-color: white;
+  font-size: small;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  color: var(--blue500);
+
+  img {
+    width: 100%;
+    max-width: 60px;
+    height: auto;
+    margin-right: 25px;
+  }
+}
+
+body {
+  background-color: lightgrey;
+}
+
+
+.responsiveTableImage {
+  width: 100%;
+  max-width: 100px;
+  height: auto;
+}
+
+
+$gl-ms: "screen and (max-width: 23.5em)"; // up to 360px
+$gl-xs: "screen and (max-width: 600px)"; // up to 568px
+$gl-sm: "screen and (max-width: 48em)"; // max 768px
+$gl-md: "screen and (max-width: 64em)"; // max 1024px
+$gl-lg: "screen and (max-width: 80em)"; // max 1280px
+
+
+table {
+  margin-top: 2rem;
+  border-collapse: separate;
+  width: 100%;
+  background: white;
+  td, th {
+    padding: 8px;
+    border-bottom: solid var(--darkGrayishBlue50);
+  }
+
+  th {
+    color: var(--blue500) !important;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--darkGrayishBlue50);
+    color: white;
+  }
+}
+
+
+@media #{$gl-xs} {
+  table {
+    padding-right: 2rem;
+    padding-left: 1rem;
+  }
+  tr {
+    width: 100%;
+    border-bottom: 1px solid #e0e3e2;
+    padding: 0.5rem;
+    display: inline-table;
+
+    th, td {
+      display: block;
+      border: none;
+      width: 100%;
+    }
+    th{
+      //margin-right: 2rem;
+    }
+  }
+
+
+}
+
+
