@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TableFooterComponent } from './table-footer.component';
+import spyOn = jest.spyOn;
 
 describe('TableFooterComponent', () => {
   let component: TableFooterComponent;
@@ -10,7 +11,7 @@ describe('TableFooterComponent', () => {
     await TestBed.configureTestingModule({
       imports: [TableFooterComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(TableFooterComponent);
     component = fixture.componentInstance;
@@ -20,4 +21,11 @@ describe('TableFooterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit amount selected when call emitAmount', () => {
+    const spy = spyOn(fixture.componentInstance.amountChange, 'emit');
+    fixture.componentInstance.emitAmount();
+    expect(spy).toHaveBeenCalled();
+  })
+
 });

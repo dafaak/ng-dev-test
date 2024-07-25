@@ -2,6 +2,7 @@
   <app-products-table [financialProducts]="financialProducts$|async" [amountOfRecordsToShow]="amountOfRecordsToShow">
   </app-products-table>
 
-  <app-table-footer [amount]="totalRecords" (amountChange)="handleAmountChange($event)" ></app-table-footer>
+  <app-table-footer [amount]="totalRecords" (amountChange)="handleAmountChange($event)">
+  </app-table-footer>
 </div>
 
