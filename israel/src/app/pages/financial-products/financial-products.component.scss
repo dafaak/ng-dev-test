@@ -1,4 +1,20 @@
-.table-container {
+.financial-product-container {
   background: white;
   padding-bottom: 10px;
+}
+
+.table-header {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between
+}
+
+.table-search-bar-container {
+  text-align: start;
+  margin: 1em;
+}
+
+.table-create-button-container {
+  text-align: end;
+  margin: 1em;
 }

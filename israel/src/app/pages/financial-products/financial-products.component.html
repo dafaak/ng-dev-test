@@ -1,4 +1,15 @@
-<div class="table-container">
+<div class="financial-product-container">
+  <div class="table-header">
+    <div class="table-search-bar-container">
+      <app-search-bar (searchChange)="handleSearchChange($event)">
+      </app-search-bar>
+    </div>
+    <div class="table-create-button-container">
+      <button class="button primary-button" (click)="navToCreate()">Agregar</button>
+    </div>
+  </div>
+
+
   <app-products-table [financialProducts]="financialProducts$|async" [amountOfRecordsToShow]="amountOfRecordsToShow">
   </app-products-table>
 

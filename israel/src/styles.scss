@@ -17,6 +17,10 @@ html * {
   text-align: center;
   justify-content: center;
   color: var(--blue500);
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
 
   img {
     width: 100%;
@@ -46,10 +50,12 @@ $gl-lg: "screen and (max-width: 80em)"; // max 1280px
 
 
 table {
-  margin-top: 2rem;
+  margin-top: 1em;
+  padding-inline: 3em;
   border-collapse: separate;
   width: 100%;
   background: white;
+
   td, th {
     padding: 8px;
     border-bottom: solid var(--darkGrayishBlue50);
@@ -82,12 +88,63 @@ table {
       border: none;
       width: 100%;
     }
-    th{
+
+    th {
       //margin-right: 2rem;
     }
   }
 
+}
+
+.container {
+  margin-top: 6em;
+}
+
+.button {
+  padding: 10px 15px;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+.primary-button {
+  background-color: var(--yellow500);
+  border: none;
+  color: var(--blue500);
 
 }
 
+.primary-button:hover {
+  color: white;
+  cursor: pointer;
+}
 
+.secondary-button {
+  background-color: var(--darkGrayishBlue50);
+  border: 1px solid var(--blue500);
+  color: var(--blue500);
+}
+
+.primary-button:disabled {
+  background-color: #FFF199;
+  color: #9FA8BE;
+  cursor: not-allowed;
+}
+
+.secondary-button:hover {
+  background-color: var(--darkGrayishBlue200);
+
+  cursor: pointer;
+}
+
+@media #{$gl-sm} {
+
+  .container {
+    margin: 10em 0 0 0;
+  }
+
+  #form-product {
+    grid-template-columns: 1fr;
+  }
+
+}

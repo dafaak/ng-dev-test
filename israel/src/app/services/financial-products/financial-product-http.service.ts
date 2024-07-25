@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "../../../environments/environment.development";
 import { FinancialProductInterface } from "../../models";
-import { Observable } from "rxjs";
+import { filter, map, Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +12,24 @@ export class FinancialProductHttpService {
   private financialProductsUrl = this.mainUrl + 'bp/products';
   private httpClient = inject(HttpClient);
 
-  getFinancialProducts(): Observable<FinancialProductInterface[]> {
-    return this.httpClient.get<FinancialProductInterface[]>(`${this.financialProductsUrl}`)
-    //   .pipe(
-    //   map(
-    //     (resp: FinancialProductInterface) => resp.data
-    //   )
-    // )
+  getFinancialProducts(_busqueda?: string): Observable<FinancialProductInterface[]> {
+    const res$ = this.httpClient.get<FinancialProductInterface[]>(`${this.financialProductsUrl}`)
+
+    if (_busqueda) {
+      return res$.pipe(
+        map(products => {
+          return products.filter(product => product.name.toLowerCase().includes(_busqueda.toLowerCase()));
+        })
+      )
+    }
+    return res$;
   }
+
+  validateId(id: string): Observable<boolean> {
+    const params = new HttpParams().set('id', id);
+
+    return this.httpClient.get<boolean>(`${this.financialProductsUrl}/verification`, {params});
+  }
+
 
 }
