@@ -1,7 +1,5 @@
-import { Component, inject, input } from '@angular/core';
+import { Component,  input } from '@angular/core';
 import { FinancialProductInterface } from "../../../../models";
-import { FinancialProductHttpService } from "../../../../services";
-import { Observable } from "rxjs";
 import { AsyncPipe, SlicePipe } from "@angular/common";
 import { FallbackImageDirective } from "../../../../directives/fallback-image/fallback-image.directive";
 
@@ -11,7 +9,7 @@ import { FallbackImageDirective } from "../../../../directives/fallback-image/fa
   imports: [
     AsyncPipe,
     SlicePipe,
-    FallbackImageDirective
+    FallbackImageDirective,
   ],
   templateUrl: './products-table.component.html',
   styleUrl: './products-table.component.scss'
@@ -19,8 +17,7 @@ import { FallbackImageDirective } from "../../../../directives/fallback-image/fa
 export class ProductsTableComponent {
   fallbackImage = '/assets/images/default-product-icon.svg';
 
-  private financialProductsService = inject(FinancialProductHttpService);
-  financialProducts$: Observable<FinancialProductInterface[]> = this.financialProductsService.getFinancialProducts();
+  financialProducts = input<FinancialProductInterface[]|null>();
 
   constructor() {
   }

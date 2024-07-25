@@ -1,0 +1,14 @@
+<div class="table-footer">
+  <div>
+    {{amount()}} Resultados
+  </div>
+
+
+  <select name="amountDataPicker" data-test="amount-data-picker" [(ngModel)]="amountSelected"
+          (change)="emitAmount()">
+    <option value="5" selected data-test="option-5">5</option>
+    <option value="10" data-test="option-10">10</option>
+    <option value="20" data-test="option-20">20</option>
+  </select>
+
+</div>
